@@ -93,7 +93,8 @@ public class Client{
                 " 8:  get my videos info \n" +
                 " 9:  get query videos info \n" +
                 "10:  get all videos info \n" +
-                "11:  close client \n" +
+                "11:  get registered users \n" +
+                "12:  close client \n" +
                 "-----------------------------------------------\n";
         
         String number = "";
@@ -142,9 +143,11 @@ public class Client{
                      break;
             //get my videos    
             case 10:  getAllVideos();
-                     break;    
+                     break;
+            //get users registered
+            case 11: getUsers();
             //close client
-            case 11: System.exit(0);
+            case 12: System.exit(0);
                      
             //invalid
             default: System.out.println("Invalid method selected");
@@ -315,6 +318,19 @@ public class Client{
         	id = selectFilmId(msg, client.getAllVideos());
         return id;
 
+    }
+    
+    public static void getUsers() throws RemoteException{
+    	showUsers(server.getUsers());
+    }
+    
+    public static void showUsers(List<String> users){
+    	System.out.println("Users:");
+    	int index = 1;
+    	for(String s: users){
+    		System.out.println(index + " - " + s.toString());
+    		index++;
+    	}
     }
     
     public static String showList(String msg, List<Video> videos){
